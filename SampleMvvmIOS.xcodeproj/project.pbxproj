@@ -23,6 +23,8 @@
 		FF38FE942C69B78C0067729F /* CatGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38FE932C69B78C0067729F /* CatGridView.swift */; };
 		FF38FE962C69B7A50067729F /* CatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38FE952C69B7A50067729F /* CatDetailView.swift */; };
 		FF38FE992C69BDB50067729F /* NetworkLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38FE982C69BDB50067729F /* NetworkLogger.swift */; };
+		FF7C8A5D2C6C62DA0093DAEA /* Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7C8A5C2C6C62DA0093DAEA /* Weight.swift */; };
+		FF7C8A5F2C6C62FA0093DAEA /* Breed.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7C8A5E2C6C62FA0093DAEA /* Breed.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		FF38FE932C69B78C0067729F /* CatGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatGridView.swift; sourceTree = "<group>"; };
 		FF38FE952C69B7A50067729F /* CatDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatDetailView.swift; sourceTree = "<group>"; };
 		FF38FE982C69BDB50067729F /* NetworkLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogger.swift; sourceTree = "<group>"; };
+		FF7C8A5C2C6C62DA0093DAEA /* Weight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weight.swift; sourceTree = "<group>"; };
+		FF7C8A5E2C6C62FA0093DAEA /* Breed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Breed.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,9 +116,9 @@
 		FF38FE562C69B2150067729F /* SampleMvvmIOS */ = {
 			isa = PBXGroup;
 			children = (
+				FF7C8A5B2C6C62C60093DAEA /* domain */,
 				FF38FE832C69B2D20067729F /* presenter */,
 				FF38FE822C69B2BB0067729F /* data */,
-				FF38FE812C69B2AF0067729F /* viewmodel */,
 				FF38FE572C69B2150067729F /* SampleMvvmIOSApp.swift */,
 				FF38FE592C69B2150067729F /* ContentView.swift */,
 				FF38FE5B2C69B2160067729F /* Assets.xcassets */,
@@ -152,7 +156,6 @@
 			isa = PBXGroup;
 			children = (
 				FF38FE842C69B3070067729F /* CatViewModel.swift */,
-				FF38FE912C69B7650067729F /* Cat.swift */,
 			);
 			path = viewmodel;
 			sourceTree = "<group>";
@@ -180,6 +183,17 @@
 				FF38FE982C69BDB50067729F /* NetworkLogger.swift */,
 			);
 			path = network;
+			sourceTree = "<group>";
+		};
+		FF7C8A5B2C6C62C60093DAEA /* domain */ = {
+			isa = PBXGroup;
+			children = (
+				FF38FE912C69B7650067729F /* Cat.swift */,
+				FF38FE812C69B2AF0067729F /* viewmodel */,
+				FF7C8A5C2C6C62DA0093DAEA /* Weight.swift */,
+				FF7C8A5E2C6C62FA0093DAEA /* Breed.swift */,
+			);
+			path = domain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF7C8A5F2C6C62FA0093DAEA /* Breed.swift in Sources */,
 				FF38FE992C69BDB50067729F /* NetworkLogger.swift in Sources */,
 				FF38FE962C69B7A50067729F /* CatDetailView.swift in Sources */,
 				FF38FE922C69B7650067729F /* Cat.swift in Sources */,
@@ -330,6 +345,7 @@
 				FF38FE5A2C69B2150067729F /* ContentView.swift in Sources */,
 				FF38FE582C69B2150067729F /* SampleMvvmIOSApp.swift in Sources */,
 				FF38FE852C69B3070067729F /* CatViewModel.swift in Sources */,
+				FF7C8A5D2C6C62DA0093DAEA /* Weight.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
