@@ -4,10 +4,12 @@
 //
 //  Created by ali sadeghian on 2024-08-11.
 //
-
 import SwiftUI
-import Kingfisher
+import Combine
+import Alamofire
 import SwiftyJSON
+import Kingfisher
+
 
 struct CatGridView: View {
     @StateObject var viewModel = CatViewModel()
@@ -19,11 +21,43 @@ struct CatGridView: View {
     
     var body: some View {
         VStack {
-            ScrollView {
-                LazyVGrid(columns: columns) {
-                    ForEach(viewModel.cats) { cat in
-                        NavigationLink(destination: CatDetailView(cat: cat)) {
-                            CatGridItemView(cat: cat)
+            // Page Size Selector
+            HStack {
+                Text("Select Page Size:")
+                    .font(.headline)
+                
+                ForEach([5, 10, 20, 50], id: \.self) { size in
+                    Button(action: {
+                        viewModel.updatePageSize(to: size)
+                    }) {
+                        Text("\(size)")
+                            .padding(8)
+                            .background(viewModel.pageSize == size ? Color.blue : Color.gray)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    }
+                }
+            }
+            .padding(.horizontal)
+            .padding(.top)
+            
+            // ScrollViewReader provides a proxy for scrolling
+            ScrollViewReader { scrollViewProxy in
+                ScrollView {
+                    LazyVGrid(columns: columns) {
+                        ForEach(viewModel.cats) { cat in
+                            NavigationLink(destination: CatDetailView(cat: cat)) {
+                                CatGridItemView(cat: cat)
+                            }
+                            .id(cat.id) // Assign an ID for each item in the grid
+                        }
+                    }
+                    .onChange(of: viewModel.currentPagePublic) {
+                        // Scroll to the top when the page changes
+                        withAnimation {
+                            if let firstCat = viewModel.cats.first {
+                                scrollViewProxy.scrollTo(firstCat.id, anchor: .top)
+                            }
                         }
                     }
                 }
@@ -37,10 +71,10 @@ struct CatGridView: View {
                     Text("Previous")
                 }
                 .padding()
-                .disabled(viewModel.currentPage == 0) // Disable if on the first page
-
+                .disabled(viewModel.currentPagePublic == 0) // Disable if on the first page
+                
                 Spacer()
-
+                
                 Button(action: {
                     viewModel.increasePage()
                 }) {
@@ -50,7 +84,7 @@ struct CatGridView: View {
             }
         }
         .onAppear {
-            viewModel.fetchCats(page: viewModel.currentPage) // Fetch initial data
+            viewModel.fetchCats(page: viewModel.currentPagePublic, limit: viewModel.pageSize) // Fetch initial data
         }
         .navigationBarTitle("Cats")
     }
@@ -68,7 +102,6 @@ struct CatGridItemView: View {
     }
 }
 
-
 #Preview {
     CatGridView(viewModel: CatViewModel())
 }
@@ -76,7 +109,7 @@ struct CatGridItemView: View {
 
 #Preview {
     CatGridItemView(cat: Cat(json: JSON([ "height": 720,
-                                        "id" : "r5FkDFDre",
-                       "url" : "https://cdn2.thecatapi.com/images/r5FkDFDre.jpg",
-                       "width" : 1280])))
+                                          "id" : "r5FkDFDre",
+                                          "url" : "https://cdn2.thecatapi.com/images/r5FkDFDre.jpg",
+                                          "width" : 1280])))
 }
